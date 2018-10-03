@@ -12,9 +12,25 @@ int gcd_naive(int a, int b) {
   return current_gcd;
 }
 
+long long gcd_fast(int a,int b)
+{
+int b_dashed=b;
+int gcd=a;
+  while(true)
+  {
+    if(gcd==0)
+      {
+          return a;
+      }
+      gcd=a%b_dashed;
+      a=b_dashed;
+      b_dashed=gcd;
+  }
+}
+
 int main() {
   int a, b;
   std::cin >> a >> b;
-  std::cout << gcd_naive(a, b) << std::endl;
+  std::cout << gcd_fast(a, b) << std::endl;
   return 0;
 }

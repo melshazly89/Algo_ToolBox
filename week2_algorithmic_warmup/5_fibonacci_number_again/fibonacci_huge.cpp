@@ -1,19 +1,15 @@
 #include <iostream>
 
 long long get_fibonacci_huge_naive(long long n, long long m) {
-    if (n <= 1)
-        return n;
+	long long result[n];
+	result[0]=0;
+	result[1]=1;
+	for(int i=2;i<=n;i++)
+	{
+		result[i]=(result[i-1]+result[i-2])%m;
+	}
 
-    long long previous = 0;
-    long long current  = 1;
-
-    for (long long i = 0; i < n - 1; ++i) {
-        long long tmp_previous = previous;
-        previous = current;
-        current = tmp_previous + current;
-    }
-
-    return current % m;
+    return result[n];
 }
 
 int main() {
