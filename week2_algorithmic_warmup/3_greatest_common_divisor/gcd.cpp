@@ -16,6 +16,22 @@ do
   return b;
 }
 
+long long gcd_fast(int a,int b)
+{
+int b_dashed=b;
+int gcd=a;
+  while(true)
+  {
+    if(gcd==0)
+      {
+          return a;
+      }
+      gcd=a%b_dashed;
+      a=b_dashed;
+      b_dashed=gcd;
+  }
+}
+
 int main() {
   int a, b;
   std::cin >> a >> b;
