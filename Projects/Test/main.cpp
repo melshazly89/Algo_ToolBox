@@ -8,49 +8,68 @@ int First(const vector<int> &a, int x)
 {
   int l=0;
   int u=a.size()-1;
-  int mid=0;
-  while(l<=u)
+  int mid=l+(u-l)/2;
+  while(1)
   {
-      mid=l+(u-l)/2;
       if(a[mid-1]<a[mid] && a[mid]==x)
       {
           return mid;
       }
-      else if(a[mid-1]==a[mid] || a[mid]>x)
+      else if(a[mid-1]==a[mid] &&a[mid]==x)
+      {
+          mid=mid-1;
+      }
+      else if(a[mid+1]==a[mid] &&a[mid]==x)
+      {
+          mid=mid+1;
+      }
+      else if(a[mid]>x)
       {
           u=mid-1;
+          mid=l+(u-l)/2;
       }
       else if(a[mid+1]==a[mid] || a[mid]<x)
       {
           l=mid+1;
+          mid=l+(u-l)/2;
       }
       else
       {
-      /*DO NOTHING*/
+      return -1;
       }
   }
-return -1;
+
 }
 
 int Last(const vector<int> &a, int x)
 {
   int l=0;
   int u=a.size()-1;
-  int mid=0;
+  int mid=l+(u-l)/2;
   while(l<=u)
   {
-      mid=l+(u-l)/2;
+
       if(a[mid+1]>a[mid] && a[mid]==x)
       {
           return mid;
       }
-      else if(a[mid-1]==a[mid] || a[mid]>x)
+      else if(a[mid-1]==a[mid] &&a[mid]==x)
+      {
+          mid=mid-1;
+      }
+      else if(a[mid+1]==a[mid] &&a[mid]==x)
+      {
+          mid=mid+1;
+      }
+      else if(a[mid]>x)
       {
           u=mid-1;
+          mid=l+(u-l)/2;
       }
-      else if(a[mid+1]==a[mid] || a[mid]<x)
+      else if(a[mid]<x)
       {
           l=mid+1;
+          mid=l+(u-l)/2;
       }
       else
       {
@@ -110,7 +129,7 @@ int main() {
   for (int i = 0; i < m; ++i) {
     //replace with the call to binary_search when implemented
     //std::cout << binary_search(a, b[i]) << "\n";
-    std::cout << Last(a, b[i])-First(a, b[i]) << " ";
+    std::cout <<First(a, b[i]) << " ";
   }
 
 
