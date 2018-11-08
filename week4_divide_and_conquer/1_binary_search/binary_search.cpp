@@ -109,8 +109,8 @@ int main() {
   }
   for (int i = 0; i < m; ++i) {
     //replace with the call to binary_search when implemented
-    //std::cout << binary_search(a, b[i]) << "\n";
-    std::cout << Last(a, b[i])-First(a, b[i]) << " ";
+    std::cout << binary_search(a, b[i]) << "\n";
+    //std::cout << Last(a, b[i])-First(a, b[i]) << " ";
   }
 
 

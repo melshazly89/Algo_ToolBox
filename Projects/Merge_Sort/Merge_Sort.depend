@@ -1,4 +1,6 @@
 # depslib dependency file v1.0
-1541080732 source:d:\training\private repositories\algo_toolbox\projects\merge_sort\main.cpp
+1541328623 source:d:\training\private repositories\algo_toolbox\projects\merge_sort\main.cpp
 	<iostream>
+	<vector>
+	<cstdlib>
 

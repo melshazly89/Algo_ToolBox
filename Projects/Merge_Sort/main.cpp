@@ -1,66 +1,70 @@
 #include <iostream>
+#include <vector>
+#include <cstdlib>
 
-using namespace std;
-void Merge(int a[],int l,int m,int r);
-void printArray(int A[], int size);
-void sort(int a[],int l,int r);
-    int arr[] = {12, 11, 13, 5, 6, 7};
-    int arr_size = sizeof(arr)/sizeof(arr[0]);
-int main()
+using std::vector;
+using std::swap;
+void partition3(vector<int> &a, int l, int r,int *lt,int *gt)
 {
-    std::cout<<"Given array is "<<"\n";
-    printArray(arr, arr_size);
-    sort(arr, 0, arr_size-1);
-
-    std::cout<<"Sorted array is  "<<"\n";
-    printArray(arr, arr_size);
-    return 0;
+    *lt=l;
+    *gt=r;
+    int i=l;
+	int x=a[l];
+	int counter=0;
+	while(i<=(*gt))
+	{
+		if(a[i]==x)
+		{
+			i++;
+			counter++;
+		}
+		else if(a[i]<x)
+		{
+			swap(a[i++],a[(*lt)++]);
+		}
+		else
+		{
+			swap(a[i],a[(*gt)--]);
+		}
+	}
+	std::cout<<"counter:"<<counter<<"\n";
 }
-void printArray(int A[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
-        std::cout<< A[i];
-    std::cout<<"\n";
-}
-void sort(int a[],int l,int r)
-{
-if(l<r)
-{
-    int m=l+(r-l)/2;
-    sort(a,l,m);
-    sort(a,m+1,r);
-    Merge(a,l,m,r);
-}
-
+int partition2(vector<int> &a, int l, int r) {
+  int x = a[l];
+  int j = l;
+  for (int i = l + 1; i <= r; i++) {
+    if (a[i] <= x) {
+      j++;
+      swap(a[i], a[j]);
     }
-void Merge(int a[],int l,int m,int r)
-{
-    int i,j,k;
-    int n1=m-l+1;
-    int n2=r-m;
-    int L[n1],R[n2];
-    int result[r-l+1];
-    for(int i=0;i<n1;i++)
-        L[i]=a[l+i];
-    for(int j=0;j<n2;j++)
-        R[j]=a[j+m+1];
+  }
+  swap(a[l], a[j]);
+  return j;
+}
 
-    i=0;  /*Initial index of the left array*/
-    j=0;  /*Initial index of the right array*/
-    k=l;  /*Initial index of the Merged array*/
-    while(i<n1 && j<n2)
-    {
-        if(L[i]<=R[j])
-            a[k++]=L[i++];
-        else
-            a[k++]=R[j++];
-    }
-/*
-    while(i<n1)
-        a[k++] = L[i++];
+void randomized_quick_sort(vector<int> &a, int l, int r) {
+	int m1,m2;
+  if (l >= r) {
+    return;
+  }
 
-    while (j < n2)
-        a[k++] = R[j++];
-        */
+  int k = l + rand() % (r - l + 1);
+  swap(a[l], a[k]);
+  partition3(a, l, r,&m1,&m2);
+
+  randomized_quick_sort(a, l, m1 - 1);
+  randomized_quick_sort(a, m2 + 1, r);
+}
+
+int main() {
+  int n;
+  std::cin >> n;
+  vector<int> a(n);
+  for (size_t i = 0; i < a.size(); ++i) {
+    std::cin >> a[i];
+  }
+  randomized_quick_sort(a, 0, a.size() - 1);
+  for (size_t i = 0; i < a.size(); ++i) {
+    std::cout << a[i] << ' ';
+  }
 }

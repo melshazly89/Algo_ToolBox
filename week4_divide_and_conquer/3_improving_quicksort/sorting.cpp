@@ -10,11 +10,13 @@ void partition3(vector<int> &a, int l, int r,int *lt,int *gt)
     *gt=r;
     int i=l;
 	int x=a[l];
+	int counter=0;
 	while(i<=(*gt))
 	{
 		if(a[i]==x)
 		{
 			i++;
+			counter++;
 		}
 		else if(a[i]<x)
 		{
@@ -25,6 +27,7 @@ void partition3(vector<int> &a, int l, int r,int *lt,int *gt)
 			swap(a[i],a[(*gt)--]);
 		}
 	}
+	std::cout<<"counter:"<<counter<<"\n";
 }
 int partition2(vector<int> &a, int l, int r) {
   int x = a[l];
